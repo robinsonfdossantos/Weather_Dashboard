@@ -114,4 +114,7 @@ button {
     margin: 10px;
     width: 20%;
     justify-content: center;
+    background-color: rgb(153, 205, 231);
+    background-image: linear-gradient(to top left, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2) 30%, rgba(0, 0, 0, 0));
 }
+

@@ -16,7 +16,7 @@ You will use `localStorage` to store any persistent data. For more information o
 AS A traveler
 I WANT to see the weather outlook for multiple cities
 SO THAT I can plan a trip accordingly
-```
+```Paris, FR
 
 ## Acceptance Criteria
 

@@ -165,11 +165,6 @@ function clearLocalStorage() {
 }
 
 
-
-
-
-
-
 //  ***** Call the function on button click *****
 $("#search-button").on("click", function() {
   
@@ -178,4 +173,4 @@ $("#search-button").on("click", function() {
   getForecast();
 });
 
-
+displayCitiesButtons();
