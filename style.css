@@ -80,9 +80,9 @@ button {
 
 .search-result {
     display: flex;
-    justify-content: flex-start;
+    justify-content: flex-end;
     margin: 10px;
-    flex-direction: column;
+    flex-direction: column-reverse;
     width: 20%;
 }
 
@@ -96,7 +96,10 @@ button {
 
 .five-day{
     display: flex;
-    justify-content: flex-start;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 75%;
 }
 
 .forecast-item{

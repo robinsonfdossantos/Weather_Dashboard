@@ -123,10 +123,14 @@ $("#search-button").on("click", function() {
 });
 
 
-
 //  ****** Local Storage and create buttons ****
 function saveCities(){
   const newCity = $("#city-search").val();
+
+ // Check if the value is empty
+  if (!newCity.trim()) {
+    return;
+  }
 
   const savedCities = JSON.parse(localStorage.getItem("city")) || [];
 
@@ -136,41 +140,43 @@ function saveCities(){
   }
 }
 
+
+
 // ***** Create buttons of previous searches *****
 function displayCitiesButtons(){
   $("#city-saved").empty();
   const savedCities = JSON.parse(localStorage.getItem("city")) || [];
 
-  for (let i = 0; i < savedCities.length; i++) {
-      const city = savedCities[i];
+      savedCities.forEach((city) => {
+        const btn = document.createElement("button");
+        btn.type = "button";
+        btn.innerHTML = city;
+        btn.onclick = () => {
+         $("#city-search").val(city);
+          getWeather(city);
+          getForecast();
+        };
       
-      const btn = $(`
-      <button type="button" onclick=getWeather('${city}')>${city}</button>
-      `)
+        $("#city-saved").append(btn)
 
-      $("#city-saved").append(btn)
-
-  }
+  });
 }
 
+
+
+// ****** Clear buttons and empty Local Storage *********
 function clearLocalStorage() {
   // Clear all items in local storage
   localStorage.clear();
 
   // Reset the weather and forecast data on the web page
-  const weatherDataElement = document.getElementById("city-search");
-  const forecastDataElement = document.getElementById("city-saved");
-  weatherDataElement.innerHTML = "";
-  forecastDataElement.innerHTML = "";
+  const weatherElement = document.getElementById("city-search");
+  const forecastElement = document.getElementById("city-saved");
+  weatherElement.innerHTML = "";
+  forecastElement.innerHTML = "";
 }
 
 
-//  ***** Call the function on button click *****
-$("#search-button").on("click", function() {
-  
-  const city = document.getElementById("city-search").value;
-  getWeather(city);
-  getForecast();
-});
-
+// **** Keep the buttons on screen by Local Storage ****
 displayCitiesButtons();
+
