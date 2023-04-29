@@ -48,6 +48,8 @@ function getWeather(city) {
       }
     })
     .then(data => {
+      const date = new Date(data.dt * 1000);
+      const formattedDate = date.toLocaleDateString("en-US", { weekday: "long", month: "long", day: "numeric" });
       const temperature = data.main.temp;
       const windSpeed = data.wind.speed;
       const humidity = data.main.humidity;
@@ -56,6 +58,7 @@ function getWeather(city) {
       const weatherDataElement = document.getElementById("selected-city");
       weatherDataElement.innerHTML = `
         <h3>${city}</h3>
+        <per>${formattedDate}</per>
         <img src="http://openweathermap.org/img/w/${data.weather[0].icon}.png">
         <p>Temperature: ${temperature} &deg;C</p>
         <p>Wind Speed: ${windSpeed} m/s</p>
@@ -63,6 +66,7 @@ function getWeather(city) {
       `;
     })
 }
+
 
 
 
@@ -104,9 +108,9 @@ function getForecast() {
           <div class="forecast-item">
             <h4>${dayOfWeek}</h4>
             <img src="http://openweathermap.org/img/w/${iconCode}.png">
-            <p>Temp: ${temperature} &deg;C</p>
-            <p>Wind: ${windSpeed} m/s</p>
-            <p>Hum: ${humidity} %</p>
+            <p>Temperature: ${temperature} &deg;C</p>
+            <p>Wind Speed: ${windSpeed} m/s</p>
+            <p>Humidity: ${humidity} %</p>
           </div>
         `;
       });
@@ -170,13 +174,23 @@ function clearLocalStorage() {
   localStorage.clear();
 
   // Reset the weather and forecast data on the web page
-  const weatherElement = document.getElementById("city-search");
-  const forecastElement = document.getElementById("city-saved");
-  weatherElement.innerHTML = "";
-  forecastElement.innerHTML = "";
+  const weatherDataElement = document.getElementById("city-search");
+  const forecastDataElement = document.getElementById("city-saved");
+  weatherDataElement.innerHTML = "";
+  forecastDataElement.innerHTML = "";
 }
 
 
 // **** Keep the buttons on screen by Local Storage ****
 displayCitiesButtons();
+
+
+// ***** Load the page with Adelaide forecast *****
+window.onload = function() {
+  city=document.getElementById("city-search");
+  city.value = "Adelaide, AU";
+  getWeather("Adelaide, AU");
+  getForecast();
+};
+
 
