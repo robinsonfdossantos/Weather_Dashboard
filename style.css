@@ -121,3 +121,69 @@ button {
     background-image: linear-gradient(to top left, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2) 30%, rgba(0, 0, 0, 0));
 }
 
+
+
+@media screen and (max-width: 1120px) {
+    .content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .searching {
+        width: 95%;
+        border-block-end: none; 
+    }
+
+    .text-search {
+        display: flex;
+        justify-content: center;
+    }
+
+    .results {
+        flex-direction: column-reverse;
+    }
+
+    .search-result {
+        flex-direction: row-reverse;
+        width: 95%;
+        justify-content: space-around;
+    }
+
+    .search-result button {
+        display: flex;
+        margin: 5px;
+        flex-shrink: 1;
+    }
+
+    .five-day {
+        display: flex;
+        width: 95%;
+        margin-bottom: 150px;
+        height: 150px;;
+    }
+
+    #city-saved {
+        flex-wrap: wrap;
+    }
+
+    #future-forecast {
+        width: auto;
+     }
+
+}
+
+
+@media screen and (max-width: 722px) {
+
+    #future-forecast {
+        
+     }
+
+     .results {
+        display: flex ;
+        align-items: center;
+        flex-wrap: wrap;
+     }
+
+}

@@ -159,6 +159,7 @@ function displayCitiesButtons(){
          $("#city-search").val(city);
           getWeather(city);
           getForecast();
+          $("#city-search").val('');
         };
       
         $("#city-saved").append(btn)
@@ -191,6 +192,6 @@ window.onload = function() {
   city.value = "Adelaide, AU";
   getWeather("Adelaide, AU");
   getForecast();
+  city.value = "";
 };
-
 
