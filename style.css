@@ -1,5 +1,3 @@
-
-
 header {
     display: flex;
     justify-content: center;
@@ -13,6 +11,14 @@ h1 {
     font-size: 36px;
 }
 
+h3{
+    font-size: 32px;
+}
+
+h4 {
+    font-size: 30px;
+}
+
 p {
     font-family: Georgia, serif;
     font-size: 20px;
@@ -23,8 +29,23 @@ body {
     background-color: #f1f1f1;
 }
 
-.content {
+main {
     display: flex;
+}
+
+.content {
+    margin-top: 40px;
+    margin-left: 20px;
+    display: flex;
+    width: 20%;
+    flex-direction: column;
+}
+
+.results {
+    display: flex;
+    width: 60%;
+    flex-direction: column;
+    align-items: center;
 }
 
 .searching {
@@ -32,8 +53,11 @@ body {
     justify-content: center;
     margin: 10px;
     flex-direction: column;
-    width: 20%;
-    border-block-end: solid blueviolet; 
+    border-block-end: solid blueviolet;
+}
+
+.searching button {
+    margin-bottom: 15px;
 }
 
 button {
@@ -48,34 +72,18 @@ button {
     background-image: linear-gradient(to top left, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2) 30%, rgba(0, 0, 0, 0));
 }
 
-#button-city {
-    line-height: 2.5;
-    margin-top: 10px;
-    padding: 0 20px;
-    font-size: 1rem;
-    text-align: center;
-    color: #fff;
-    border-radius: 10px;
-    background-color: rgb(158, 153, 231);
-    background-image: linear-gradient(to top left, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2) 30%, rgba(0, 0, 0, 0));
-}
-
-.currentCity {
+#selected-city {
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    width: 75%;
+    width: 100%;
     height: 300px;
-    margin: 20px;
+    margin: 40px;
 }
 
-#city-info {
-    margin: 20px;
-}
-
-.results {
-    display: flex;
+#selected-city p {
+    font-size: 16px;
 }
 
 .search-result {
@@ -83,88 +91,61 @@ button {
     justify-content: flex-end;
     margin: 10px;
     flex-direction: column-reverse;
-    width: 20%;
+    align-items: stretch;
 }
 
 #future-forecast {
     display: flex;
-    width: 70%;
+    width: 80%;
     height: 250px;
-    margin: 50px;
+    margin: 20px;
     justify-content: space-between;
 }
 
-.five-day{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    width: 75%;
-}
-
-.forecast-item{
+.forecast-item {
     display: flex;
     margin: 30px;
     flex-direction: column;
 }
 
-.forecast-item p{
+.forecast-item p {
     font-size: 14px;
 }
 
-.clear {
+#clear {
     display: flex;
     margin: 10px;
-    width: 20%;
+    align-items: stretch;
     justify-content: center;
     background-color: rgb(153, 205, 231);
     background-image: linear-gradient(to top left, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2) 30%, rgba(0, 0, 0, 0));
 }
 
+.minMax {
+    font-size: 13px;
+}
 
 
-@media screen and (max-width: 1120px) {
+@media screen and (max-width: 1189px) {
     .content {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
+        width: 100%;
+        margin-right: 20px;
+        margin-top: 20px;
     }
 
-    .searching {
-        width: 95%;
-        border-block-end: none; 
-    }
-
-    .text-search {
-        display: flex;
-        justify-content: center;
-    }
-
-    .results {
-        flex-direction: column-reverse;
+    .page {
+        flex-wrap: wrap;
     }
 
     .search-result {
         flex-direction: row-reverse;
         width: 95%;
         justify-content: space-around;
-    }
-
-    .search-result button {
-        display: flex;
-        margin: 5px;
-        flex-shrink: 1;
-    }
-
-    .five-day {
-        display: flex;
-        width: 95%;
-        margin-bottom: 150px;
-        height: 150px;;
-    }
-
-    #city-saved {
         flex-wrap: wrap;
+    }
+
+    .results {
+        width: 100%;
     }
 
     #future-forecast {
@@ -174,16 +155,11 @@ button {
 }
 
 
-@media screen and (max-width: 722px) {
+@media screen and (max-width: 745px) {
 
     #future-forecast {
-        
-     }
-
-     .results {
-        display: flex ;
-        align-items: center;
         flex-wrap: wrap;
+        justify-content: center;
      }
 
 }

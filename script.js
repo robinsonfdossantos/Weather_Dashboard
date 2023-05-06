@@ -11,7 +11,7 @@ const cityList = document.querySelector("#city-list");
 citySearch.addEventListener("keyup", event => {
   const query = event.target.value;
   if (query.length > 2) {
-  
+
     const url = `https://api.openweathermap.org/data/2.5/find?q=${query}&appid=${APIKey}`;
     fetch(url)
       .then(response => response.json())
@@ -19,7 +19,7 @@ citySearch.addEventListener("keyup", event => {
         const cities = data.list;
         cityList.innerHTML = "";
         cities.forEach(city => {
-        const li = document.createElement("li");
+          const li = document.createElement("li");
           li.textContent = `${city.name}, ${city.sys.country}`;
           li.addEventListener("click", () => {
             citySearch.value = `${city.name}, ${city.sys.country}`;
@@ -29,7 +29,7 @@ citySearch.addEventListener("keyup", event => {
         });
       })
       .catch(error => console.error(error));
-  } 
+  }
 });
 
 
@@ -51,15 +51,23 @@ function getWeather(city) {
       const date = new Date(data.dt * 1000);
       const formattedDate = date.toLocaleDateString("en-US", { weekday: "long", month: "long", day: "numeric" });
       const temperature = data.main.temp;
+
+      const tempMin = data.main.temp_min;
+      const tempMax = data.main.temp_max;
+
       const windSpeed = data.wind.speed;
       const humidity = data.main.humidity;
 
       // Display the weather
       const weatherDataElement = document.getElementById("selected-city");
       weatherDataElement.innerHTML = `
-        <h3>${city}</h3>
+        <h3>${city}</h3> 
         <per>${formattedDate}</per>
         <img src="http://openweathermap.org/img/w/${data.weather[0].icon}.png">
+      <div class=minMax>
+        <per>Min Temp: ${tempMin} &deg;C</per><p></p>
+        <per>Max Temp: ${tempMax} &deg;C</per><p></p>
+      </div>  
         <p>Temperature: ${temperature} &deg;C</p>
         <p>Wind Speed: ${windSpeed} m/s</p>
         <p>Humidity: ${humidity} %</p>
@@ -73,7 +81,7 @@ function getWeather(city) {
 
 // ******* 5-Day Forecast *******
 function getForecast() {
- 
+
   const city = document.getElementById("city-search").value;
 
   const apiUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${APIKey}&units=metric`;
@@ -106,7 +114,7 @@ function getForecast() {
 
         forecastDataElement.innerHTML += `
           <div class="forecast-item">
-            <h4>${dayOfWeek}</h4>
+            <h5>${dayOfWeek}</h5>
             <img src="http://openweathermap.org/img/w/${iconCode}.png">
             <p>Temperature: ${temperature} &deg;C</p>
             <p>Wind Speed: ${windSpeed} m/s</p>
@@ -119,50 +127,52 @@ function getForecast() {
 
 
 //  ***** Call the function on button click *****
-$("#search-button").on("click", function() {
-  
-  const city = document.getElementById("city-search").value;
+$("#search-button").on("click", function () {
+
+  const city = document.getElementById("city-search").value; Adelaide, AUAdelaide, AURome
   getWeather(city);
   getForecast();
 });
 
 
 //  ****** Local Storage and create buttons ****
-function saveCities(){
+function saveCities() {
   const newCity = $("#city-search").val();
 
- // Check if the value is empty
+  // Check if the value is empty
   if (!newCity.trim()) {
     return;
   }
 
   const savedCities = JSON.parse(localStorage.getItem("city")) || [];
 
-  if(!savedCities.includes(newCity)){
-      savedCities.push(newCity);
-      localStorage.setItem("city", JSON.stringify(savedCities));
+  if (!savedCities.includes(newCity)) {
+    if (savedCities.length >= 6) {
+      savedCities.shift(); // Remove the first city (oldest) from the array
+    }
+    savedCities.push(newCity);
+    localStorage.setItem("city", JSON.stringify(savedCities));
   }
 }
 
 
 
 // ***** Create buttons of previous searches *****
-function displayCitiesButtons(){
+function displayCitiesButtons() {
   $("#city-saved").empty();
   const savedCities = JSON.parse(localStorage.getItem("city")) || [];
 
-      savedCities.forEach((city) => {
-        const btn = document.createElement("button");
-        btn.type = "button";
-        btn.innerHTML = city;
-        btn.onclick = () => {
-         $("#city-search").val(city);
-          getWeather(city);
-          getForecast();
-          $("#city-search").val('');
-        };
-      
-        $("#city-saved").append(btn)
+  savedCities.forEach((city) => {
+    const btn = document.createElement("button");
+    btn.type = "button";
+    btn.innerHTML = city;
+    btn.onclick = () => {
+      $("#city-search").val(city);
+      getWeather(city);
+      getForecast();
+    };
+
+    $("#city-saved").append(btn)
 
   });
 }
@@ -187,11 +197,10 @@ displayCitiesButtons();
 
 
 // ***** Load the page with Adelaide forecast *****
-window.onload = function() {
-  city=document.getElementById("city-search");
+window.onload = function () {
+  city = document.getElementById("city-search");
   city.value = "Adelaide, AU";
   getWeather("Adelaide, AU");
   getForecast();
-  city.value = "";
 };
 
