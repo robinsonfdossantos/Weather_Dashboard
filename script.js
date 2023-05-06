@@ -129,7 +129,7 @@ function getForecast() {
 //  ***** Call the function on button click *****
 $("#search-button").on("click", function () {
 
-  const city = document.getElementById("city-search").value; Adelaide, AUAdelaide, AURome
+  const city = document.getElementById("city-search").value;
   getWeather(city);
   getForecast();
 });
