@@ -135,22 +135,25 @@ $("#search-button").on("click", function () {
 });
 
 
+
 //  ****** Local Storage and create buttons ****
 function saveCities() {
   const newCity = $("#city-search").val();
-
   // Check if the value is empty
   if (!newCity.trim()) {
     return;
   }
 
-  const savedCities = JSON.parse(localStorage.getItem("city")) || [];
+  let savedCities = JSON.parse(localStorage.getItem("city")) || [];
 
   if (!savedCities.includes(newCity)) {
-    if (savedCities.length >= 6) {
-      savedCities.shift(); // Remove the first city (oldest) from the array
+    savedCities = savedCities.filter(city => city !== newCity);
+    savedCities.unshift(newCity);
+    // Limit the array to a maximum of 6 cities
+    if (savedCities.length > 6) {
+      savedCities.pop();
     }
-    savedCities.push(newCity);
+
     localStorage.setItem("city", JSON.stringify(savedCities));
   }
 }
@@ -162,23 +165,30 @@ function displayCitiesButtons() {
   $("#city-saved").empty();
   const savedCities = JSON.parse(localStorage.getItem("city")) || [];
 
-  savedCities.forEach((city) => {
+  savedCities.forEach((city, index) => {
     const btn = document.createElement("button");
     btn.type = "button";
     btn.innerHTML = city;
     btn.onclick = () => {
+      savedCities.splice(index, 1);
+      savedCities.unshift(city);
+      localStorage.setItem("city", JSON.stringify(savedCities));
       $("#city-search").val(city);
       getWeather(city);
       getForecast();
+      displayCitiesButtons();
     };
 
-    $("#city-saved").append(btn)
-
+    $("#city-saved").append(btn);
   });
 }
 
+// **** Keep the buttons on screen by Local Storage ****
+displayCitiesButtons();
 
 
+
+/*
 // ****** Clear buttons and empty Local Storage *********
 function clearLocalStorage() {
   // Clear all items in local storage
@@ -190,10 +200,8 @@ function clearLocalStorage() {
   weatherDataElement.innerHTML = "";
   forecastDataElement.innerHTML = "";
 }
+*/
 
-
-// **** Keep the buttons on screen by Local Storage ****
-displayCitiesButtons();
 
 
 // ***** Load the page with Adelaide forecast *****
@@ -202,5 +210,6 @@ window.onload = function () {
   city.value = "Adelaide, AU";
   getWeather("Adelaide, AU");
   getForecast();
+  city.value = '';
 };
 

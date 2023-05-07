@@ -11,7 +11,7 @@ h1 {
     font-size: 36px;
 }
 
-h3{
+h3 {
     font-size: 32px;
 }
 
@@ -90,7 +90,7 @@ button {
     display: flex;
     justify-content: flex-end;
     margin: 10px;
-    flex-direction: column-reverse;
+    flex-direction: column;
     align-items: stretch;
 }
 
@@ -112,6 +112,7 @@ button {
     font-size: 14px;
 }
 
+/*
 #clear {
     display: flex;
     margin: 10px;
@@ -120,6 +121,7 @@ button {
     background-color: rgb(153, 205, 231);
     background-image: linear-gradient(to top left, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2) 30%, rgba(0, 0, 0, 0));
 }
+*/
 
 .minMax {
     font-size: 13px;
@@ -150,8 +152,29 @@ button {
 
     #future-forecast {
         width: auto;
-     }
+    }
 
+}
+
+
+@media screen and (max-width: 880px) {
+
+    button {
+        width: 30%;
+        margin: 3px;
+    }
+
+    .searching button {
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 810px) {
+
+    button {
+        width: 40%;
+        margin: 3px;
+    }
 }
 
 
@@ -160,6 +183,14 @@ button {
     #future-forecast {
         flex-wrap: wrap;
         justify-content: center;
-     }
+    }
 
+}
+
+@media screen and (max-width: 440px) {
+
+    button {
+        width: 95%;
+        margin: 3px;
+    }
 }
