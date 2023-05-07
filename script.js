@@ -33,8 +33,6 @@ citySearch.addEventListener("keyup", event => {
 });
 
 
-
-
 //  ****** GET DATA AND PRESENT WITH THE WEATHER ******
 function getWeather(city) {
   const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${APIKey}&units=metric`;
@@ -51,10 +49,8 @@ function getWeather(city) {
       const date = new Date(data.dt * 1000);
       const formattedDate = date.toLocaleDateString("en-US", { weekday: "long", month: "long", day: "numeric" });
       const temperature = data.main.temp;
-
       const tempMin = data.main.temp_min;
       const tempMax = data.main.temp_max;
-
       const windSpeed = data.wind.speed;
       const humidity = data.main.humidity;
 
@@ -74,9 +70,6 @@ function getWeather(city) {
       `;
     })
 }
-
-
-
 
 
 // ******* 5-Day Forecast *******
@@ -135,7 +128,6 @@ $("#search-button").on("click", function () {
 });
 
 
-
 //  ****** Local Storage and create buttons ****
 function saveCities() {
   const newCity = $("#city-search").val();
@@ -157,7 +149,6 @@ function saveCities() {
     localStorage.setItem("city", JSON.stringify(savedCities));
   }
 }
-
 
 
 // ***** Create buttons of previous searches *****
@@ -201,7 +192,6 @@ function clearLocalStorage() {
   forecastDataElement.innerHTML = "";
 }
 */
-
 
 
 // ***** Load the page with Adelaide forecast *****
